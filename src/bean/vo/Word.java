@@ -74,16 +74,15 @@ public class Word {
 	}
 	
 	public void setWordProperty(String text_Chinese,String text_English,
-			String alphabetUK,String alphabetUS,String reciteFlag,String reciteNum,String addTime,
+			String alphabetUK,String alphabetUS,int reciteFlag,int reciteNum,Date addTime,
 			String resourceUrl) throws Exception{
 		this.setText_Chinese(text_Chinese);
 		this.setText_English(text_English);
 		this.setAlphabetUK(alphabetUK);
 		this.setAlphabetUS(alphabetUS);
-		this.setReciteFlag(Integer.parseInt(reciteFlag));
-		this.setReciteNum(Integer.parseInt(reciteNum));
-		Conver conver = new Conver();
-		this.setAddTime(conver.ConverToDate(addTime));
+		this.setReciteFlag(reciteFlag);
+		this.setReciteNum(reciteNum);
+		this.setAddTime(addTime);
 		this.setResourceUrl(resourceUrl);
 	}
 	

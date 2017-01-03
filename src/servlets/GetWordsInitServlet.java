@@ -1,12 +1,14 @@
 package servlets;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import java.util.ArrayList;
 
 import bean.dao.UserDao;
@@ -39,6 +41,7 @@ public class GetWordsInitServlet extends HttpServlet {
 		String wordTable = userdao.selectWordTable(username);
 		WordDao worddao = new WordDao();
 		ArrayList<Word> wordlist = worddao.getWord(wordTable);
+		PrintWriter out = response.getWriter();
 		if(wordlist != null){
 			request.setAttribute("wordlist",wordlist);
 		}else{

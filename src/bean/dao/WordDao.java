@@ -39,7 +39,6 @@ public class WordDao {
 		Connection conn = db.getConnection();
 		String sql = "insert into "+wordTableName+" values(?,?,?,?,?,?,?,?,?)";
 		int returnValue = 0;
-		SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		ArrayList params = new ArrayList();
 		/*int rowsCount = this.getRowsCount(wordTableName);
 		ArrayList newlist = new ArrayList();
@@ -100,7 +99,7 @@ public class WordDao {
 			while(rs.next()){
 				Word word = new Word();
 				word.setWordProperty(rs.getString(2), rs.getString(3), rs.getString(4),
-						rs.getString(5),rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9));
+						rs.getString(5),rs.getInt(6), rs.getInt(7), rs.getDate(8), rs.getString(9));
 			    list.add(word);
 			}
 		} catch (Exception e) {
@@ -115,8 +114,8 @@ public class WordDao {
 		DBBean db = new DBBean();
 		Connection conn = db.getConnection();
 		Conver conver = new Conver();
-		Date date = conver.ConverToDate(dateStr);
-		String sql = "select * from "+wordTable+"where addtime< "+date+" order by addTime desc limit 3";
+		Date date = conver.ConverToDateGeneral(dateStr);
+		String sql = "select * from "+wordTable+" where addtime <= '"+date+"' order by addTime desc limit 3";
 		ArrayList<Word> list = new ArrayList<Word>();
 	    ResultSet rs = null;
 	    try {
@@ -124,7 +123,7 @@ public class WordDao {
 			while(rs.next()){
 				Word word = new Word();
 				word.setWordProperty(rs.getString(2), rs.getString(3), rs.getString(4),
-						rs.getString(5),rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9));
+						rs.getString(5),rs.getInt(6), rs.getInt(7), rs.getDate(8), rs.getString(9));
 			    list.add(word);
 			}
 		} catch (Exception e) {

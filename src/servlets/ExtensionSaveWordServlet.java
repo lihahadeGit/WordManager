@@ -39,7 +39,7 @@ public class ExtensionSaveWordServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		HttpSession session = request.getSession(false);
 		if(session == null){
-			out.print(2);//session为空状态码是2
+			out.print(2);//session为空状态码是2,用户未登陆
 		}
 		else{
 			String username = (String)session.getAttribute("username");

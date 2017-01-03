@@ -17,7 +17,7 @@ import bean.vo.Word;
 /**
  * Servlet implementation class GetWordsByStepServlet
  */
-@WebServlet("/GetWordsByStepServlet")
+
 public class GetWordsByStepServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -43,7 +43,19 @@ public class GetWordsByStepServlet extends HttpServlet {
 	    PrintWriter out = response.getWriter();
 	    try {
 			ArrayList<Word> list = worddao.getWordsByStep(3, wordTable, date);
-		    out.print("{'words':[{"+(String)list.get(0).toJsonString()+"},{"+(String)list.get(1).toJsonString()+"},{"+(String)list.get(2).toJsonString()+"}]}");
+			if(list.size() == 0){
+				 out.print("{'words':[{null}]}");
+			}
+			else if(list.size() == 1){
+				 out.print("{'words':[{"+(String)list.get(0).toJsonString()+"}]}");
+			}
+			else if(list.size() == 2){
+				 out.print("{'words':[{"+(String)list.get(0).toJsonString()+"},{"+(String)list.get(1).toJsonString()+"}]}");
+			}
+			else{
+				out.print("{'words':[{"+(String)list.get(0).toJsonString()+"},{"+(String)list.get(1).toJsonString()+"},{"+(String)list.get(2).toJsonString()+"}]}");
+				
+			}
 	    } catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

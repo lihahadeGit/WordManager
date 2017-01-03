@@ -18,5 +18,10 @@ public class Conver {
 	    Date sqlDate = new Date(df.parse(strDate).getTime());
 		return sqlDate;
 	}
+	public Date ConverToDateGeneral(String strDate) throws Exception{
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+	    Date sqlDate = new Date(df.parse(strDate).getTime());
+		return sqlDate;
+	}
 
 }
