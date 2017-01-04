@@ -41,7 +41,6 @@
     <servlet-name>GetWordsByStepServlet</servlet-name>
     <url-pattern>/GetWordsByStep</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>DeleteWordServlet</servlet-name>
     <servlet-class>servlets.DeleteWordServlet</servlet-class>
@@ -49,6 +48,23 @@
   <servlet-mapping>
     <servlet-name>DeleteWordServlet</servlet-name>
     <url-pattern>/DeleteWord</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>EditWordServlet</servlet-name>
+    <servlet-class>servlets.EditWordServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EditWordServlet</servlet-name>
+    <url-pattern>/EditWord</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>CreateGlossaryServlet</servlet-name>
+    <servlet-class>servlets.CreateGlossaryServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CreateGlossaryServlet</servlet-name>
+    <url-pattern>/CreateGlossary</url-pattern>
   </servlet-mapping>
   
   <welcome-file-list>

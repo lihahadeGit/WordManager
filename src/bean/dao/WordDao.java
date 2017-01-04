@@ -17,8 +17,7 @@ public class WordDao {
 	public boolean createWordTable(String wordTableName){
 		DBBean db = new DBBean();
 		Connection conn = db.getConnection();
-		int createNum;
-		String sql = "create table "+wordTableName+"(wordid int auto_increment,textchinese varchar(20),textenglish varchar(20),alphabetUK varchar(20),alphabetUS varchar(20),reciteflag int,recitenum int,addtime date,resourceurl varchar(20),primary key(wordid));";
+		String sql = "create table "+wordTableName+" (wordid int auto_increment,textchinese varchar(20),textenglish varchar(20),alphabetUK varchar(20),alphabetUS varchar(20),reciteflag int,recitenum int,addtime date,resourceurl varchar(20),primary key(wordid));";
 	    try{
 	    	db.executeCreate(sql, null);
 	    }
@@ -76,6 +75,23 @@ public class WordDao {
 		Connection conn = db.getConnection();
 		int wordId = Integer.parseInt(wordIdStr);
 		String sql = "delete from "+wordTable+" where wordid= "+wordId;
+		int returnValue = 0;
+		try {
+			returnValue = db.executeUpdateForWord(sql,null);
+		}catch (Exception e){ 
+		// TODO Auto-generated catch block
+		    e.printStackTrace();
+		    return -1;
+	    }
+		
+		return returnValue;
+	}
+	
+	public int editWord(String wordTable,String type,String value,String wordIdStr){
+		DBBean db = new DBBean();
+		Connection conn = db.getConnection();
+		int wordId = Integer.parseInt(wordIdStr);
+		String sql = "update "+wordTable+" set "+type+" = '"+value+"' where wordid = "+wordIdStr;
 		int returnValue = 0;
 		try {
 			returnValue = db.executeUpdateForWord(sql,null);

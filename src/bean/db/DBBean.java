@@ -106,6 +106,19 @@ public class DBBean {
 		return pstmt.executeUpdate();
 	}
 	
+	public int executeUpdateForGlossaryInfo(String sql,ArrayList params) throws Exception{
+		if(conn == null){
+			throw new Exception("数据库没有连接！");
+		}
+		
+		pstmt = conn.prepareStatement(sql);
+		
+		if(params != null){
+		}
+		
+		return pstmt.executeUpdate();
+	}
+	
 	public boolean executeCreate(String sql,ArrayList params) throws Exception{
 		if(conn == null){
 			throw new Exception("数据库没有连接！");
