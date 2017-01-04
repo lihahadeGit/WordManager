@@ -71,22 +71,22 @@ public class WordDao {
 		return returnValue;
 	}
 	
-	/*public int deleteWord(User user,Word word){
+	public int deleteWord(String wordTable,String wordIdStr){
 		DBBean db = new DBBean();
 		Connection conn = db.getConnection();
-		String wordTable = user.getWordTable();
-		String wordId = word.getWordId();
-		String sql = "delete * from "+wordTable+" where wordid= "+wordId;
+		int wordId = Integer.parseInt(wordIdStr);
+		String sql = "delete from "+wordTable+" where wordid= "+wordId;
 		int returnValue = 0;
 		try {
-			returnValue = db.executeUpdate(sql,null);
-		} catch (Exception e) 
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+			returnValue = db.executeUpdateForWord(sql,null);
+		}catch (Exception e){ 
+		// TODO Auto-generated catch block
+		    e.printStackTrace();
+		    return -1;
+	    }
 		
 		return returnValue;
-	}*/
+	}
 	
 	public ArrayList<Word> getWord(String wordTable){
 		DBBean db = new DBBean();
@@ -98,7 +98,7 @@ public class WordDao {
 			rs = db.executeQuery(sql, null);
 			while(rs.next()){
 				Word word = new Word();
-				word.setWordProperty(rs.getString(2), rs.getString(3), rs.getString(4),
+				word.setWordProperty(rs.getInt(1),rs.getString(2), rs.getString(3), rs.getString(4),
 						rs.getString(5),rs.getInt(6), rs.getInt(7), rs.getDate(8), rs.getString(9));
 			    list.add(word);
 			}
@@ -122,7 +122,7 @@ public class WordDao {
 			rs = db.executeQuery(sql, null);
 			while(rs.next()){
 				Word word = new Word();
-				word.setWordProperty(rs.getString(2), rs.getString(3), rs.getString(4),
+				word.setWordProperty(rs.getInt(1),rs.getString(2), rs.getString(3), rs.getString(4),
 						rs.getString(5),rs.getInt(6), rs.getInt(7), rs.getDate(8), rs.getString(9));
 			    list.add(word);
 			}

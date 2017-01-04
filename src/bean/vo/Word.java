@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import bean.Conver;
 
 public class Word {
+	private int wordId;
 	private String text_Chinese;
 	private String text_English;
 	private String alphabetUK;
@@ -14,6 +15,12 @@ public class Word {
 	private int reciteNum;
 	private Date addTime;
 	private String resourceUrl;
+	public int getWordId() {
+		return wordId;
+	}
+	public void setWordid(int wordId) {
+		this.wordId = wordId;
+	}
 	public String getText_Chinese() {
 		return text_Chinese;
 	}
@@ -67,15 +74,16 @@ public class Word {
 		String dateStr = df.format(this.addTime);
 		String reciteFlag = String.valueOf(this.reciteFlag);
 		String reciteNum = String.valueOf(this.reciteNum);
-		String returnStr = "text_Chinese:"+text_Chinese+","+"text_English:"+text_English+","+"alphabetUK:"+alphabetUK+","
+		String returnStr = "wordid:"+wordId+","+"text_Chinese:"+text_Chinese+","+"text_English:"+text_English+","+"alphabetUK:"+alphabetUK+","
 				+"alphabetUS:"+alphabetUS+","+"reciteFlag:"+reciteFlag+","+"reciteNum:"+reciteNum+","+"dateStr:"+dateStr+","+"resourceUrl:"+resourceUrl;
 		return returnStr;
 		
 	}
 	
-	public void setWordProperty(String text_Chinese,String text_English,
+	public void setWordProperty(int wordId,String text_Chinese,String text_English,
 			String alphabetUK,String alphabetUS,int reciteFlag,int reciteNum,Date addTime,
 			String resourceUrl) throws Exception{
+		this.setWordid(wordId);
 		this.setText_Chinese(text_Chinese);
 		this.setText_English(text_English);
 		this.setAlphabetUK(alphabetUK);

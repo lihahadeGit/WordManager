@@ -39,18 +39,20 @@ public class Test2 extends HttpServlet {
 			if(session.getAttribute("username") != null){
 				out.print(3);//已登录，跳转到主页面
 			}
-			String username = request.getParameter("username");
-			String inputPassword = request.getParameter("password");
-			UserDao userdao = new UserDao();
-			String password = userdao.selectPassword(username);
-			if(password.equals("-1")){
-				out.print(-1);//数据库查找出错
-			}
-			if(inputPassword.equals(password)){
-				out.print(1);//登录成功
-				session.setAttribute("username",username);
-			}else{
-				out.print(0);//密码不正确
+			else{
+				String username = request.getParameter("username");
+				String inputPassword = request.getParameter("password");
+				UserDao userdao = new UserDao();
+				String password = userdao.selectPassword(username);
+				if(password.equals("-1")){
+					out.print(-1);//数据库查找出错
+				}
+				if(inputPassword.equals(password)){
+					out.print(1);//登录成功
+					session.setAttribute("username",username);
+				}else{
+					out.print(0);//密码不正确
+				}
 			}
 		}
 		else{
@@ -62,7 +64,7 @@ public class Test2 extends HttpServlet {
 			if(password.equals("-1")){
 				out.print(-1);//数据库查找出错
 			}
-			if(inputPassword == password){
+			if(inputPassword.equals(password)){
 				out.print(1);//登录成功
 				hsession.setAttribute("username",username);
 			}else{

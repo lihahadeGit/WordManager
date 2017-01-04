@@ -78,7 +78,7 @@ public class LoginServlet extends HttpServlet {
 			if(password.equals("-1")){
 				out.print(-1);//数据库查找出错
 			}
-			if(inputPassword == password){
+			if(inputPassword.equals(password)){
 				out.print(1);//登录成功
 				hsession.setAttribute("username",username);
 			}else{

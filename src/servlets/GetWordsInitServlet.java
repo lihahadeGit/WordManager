@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import java.util.ArrayList;
 
@@ -36,17 +37,23 @@ public class GetWordsInitServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.setContentType("text/html;charset=utf-8");
-		String username = (String)request.getSession().getAttribute("username");
-		UserDao  userdao = new UserDao();
-		String wordTable = userdao.selectWordTable(username);
-		WordDao worddao = new WordDao();
-		ArrayList<Word> wordlist = worddao.getWord(wordTable);
+		HttpSession session = request.getSession(false);
 		PrintWriter out = response.getWriter();
-		if(wordlist != null){
-			request.setAttribute("wordlist",wordlist);
-		}else{
-			//设置响应状态码为500
-			response.sendError(500,"出错了");
+		if(session == null||session.getAttribute("username") == null){
+			out.print(3);//3表示用户未登录
+		}
+		else{
+			String username = (String)session.getAttribute("username");
+			UserDao  userdao = new UserDao();
+			String wordTable = userdao.selectWordTable(username);
+			WordDao worddao = new WordDao();
+			ArrayList<Word> wordlist = worddao.getWord(wordTable);
+			if(wordlist != null){
+				request.setAttribute("wordlist",wordlist);
+			}else{
+				//设置响应状态码为500
+				response.sendError(500,"出错了");
+			}
 		}
 	}	
 
