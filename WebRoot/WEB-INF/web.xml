@@ -57,7 +57,6 @@
     <servlet-name>EditWordServlet</servlet-name>
     <url-pattern>/EditWord</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>CreateGlossaryServlet</servlet-name>
     <servlet-class>servlets.CreateGlossaryServlet</servlet-class>
@@ -66,7 +65,6 @@
     <servlet-name>CreateGlossaryServlet</servlet-name>
     <url-pattern>/CreateGlossary</url-pattern>
   </servlet-mapping>
-  
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>

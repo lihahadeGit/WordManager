@@ -35,40 +35,17 @@ public class Test extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.setContentType("text/html;charset=utf-8");
+		String username = request.getParameter("username");
+		String password = request.getParameter("password");
+		UserDao userdao = new UserDao();
 		PrintWriter out = response.getWriter();
-		HttpSession session = request.getSession(false);
-		if(session == null){
-			out.print(2);//session为空状态码是2,用户未登陆
-		}
-		else{
-			String username = (String)session.getAttribute("username");
-			UserDao userdao = new UserDao();
-			WordDao worddao = new WordDao();
-			String wordTableName = userdao.selectWordTable(username);
-			String test_Chinese = request.getParameter("test_Chinese");
-			String test_English = request.getParameter("test_English");
-			String alphabetUK = request.getParameter("alphabetUK");
-			String alphabetUS = request.getParameter("alphabetUS");
-			int reciteFlag = 0;
-			int reciteNum = 1;
-			Date addTime = new Date();
-			String resourceUrl = request.getParameter("resourceUrl");
-			int returnValue;
-			if(wordTableName == null){
-				out.print(0);
-			}else if(wordTableName.equals("-1")){
-				out.print(-1);
-			}else{
-				returnValue = worddao.insertWord(wordTableName, test_Chinese,
-						test_English,alphabetUK,alphabetUS,reciteFlag,
-						reciteNum,addTime,resourceUrl);
-				if(returnValue == -1){
-					out.print(-1);
-				}else{
-					out.print(1);
-				}  
-			}
-		}
+		int insertResult;
+		insertResult = userdao.insertUser(username, password);
+		//System.out.println(insertResult);
+		HttpSession session = request.getSession();
+		session.setAttribute("username",username);
+		//session.setAttribute("password",password );
+		out.print(insertResult);//-1表示失败，1表示成功
 		
 	}
 

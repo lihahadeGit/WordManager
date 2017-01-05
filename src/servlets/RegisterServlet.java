@@ -15,7 +15,6 @@ import bean.dao.UserDao;
 /**
  * Servlet implementation class registerServlet
  */
-@WebServlet("/registerServlet")
 public class RegisterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -38,7 +37,7 @@ public class RegisterServlet extends HttpServlet {
 		UserDao userdao = new UserDao();
 		int existUser = userdao.selectUser(username);
 		PrintWriter out = response.getWriter();
-		out.print(existUser);
+		out.print(existUser);//0表示用户名未被注册，-1表示注册失败，1表示注册成功
 		
 	}
 
@@ -54,10 +53,11 @@ public class RegisterServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		int insertResult;
 		insertResult = userdao.insertUser(username, password);
+		//System.out.println(insertResult);
 		HttpSession session = request.getSession();
 		session.setAttribute("username",username);
 		//session.setAttribute("password",password );
-		out.print(insertResult);
+		out.print(insertResult);//-1表示失败，1表示成功
 		
 	}
 

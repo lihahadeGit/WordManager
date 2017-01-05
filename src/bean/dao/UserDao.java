@@ -23,6 +23,7 @@ public class UserDao {
 		WordDao wd = new WordDao();
 		try{
 			 returnValue = db.executeUpdateForUser(sql, params);
+			 System.out.println(returnValue);
 			 wd.createWordTable(wordTableName);
 		}
 		catch(Exception e){

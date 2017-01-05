@@ -35,13 +35,13 @@ public class Test2 extends HttpServlet {
 		HttpSession session = request.getSession(false);
 		System.out.println(session == null?"null":"1");
 		PrintWriter out = response.getWriter();
+		String username = request.getParameter("username");
+		String inputPassword = request.getParameter("password");
 		if(session != null){
-			if(session.getAttribute("username") != null){
+			if(session.getAttribute("username") != null&&session.getAttribute("username").equals(username)){
 				out.print(3);//已登录，跳转到主页面
 			}
 			else{
-				String username = request.getParameter("username");
-				String inputPassword = request.getParameter("password");
 				UserDao userdao = new UserDao();
 				String password = userdao.selectPassword(username);
 				if(password.equals("-1")){
@@ -57,8 +57,6 @@ public class Test2 extends HttpServlet {
 		}
 		else{
 			HttpSession hsession = request.getSession();
-			String username = request.getParameter("username");
-			String inputPassword = request.getParameter("password");
 			UserDao userdao = new UserDao();
 			String password = userdao.selectPassword(username);
 			if(password.equals("-1")){

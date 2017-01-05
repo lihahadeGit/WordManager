@@ -126,12 +126,12 @@ public class WordDao {
 	    return list;
 	}
 	
-	public ArrayList<Word> getWordsByStep(int step,String wordTable,String dateStr) throws Exception{
+	public ArrayList<Word> getWordsByStep(int step,String wordTable,int wordid) throws Exception{
 		DBBean db = new DBBean();
 		Connection conn = db.getConnection();
 		Conver conver = new Conver();
-		Date date = conver.ConverToDateGeneral(dateStr);
-		String sql = "select * from "+wordTable+" where addtime <= '"+date+"' order by addTime desc limit 3";
+		//Date date = conver.ConverToDateGeneral(dateStr);
+		String sql = "select * from "+wordTable+" where wordid <= "+wordid+" order by addTime desc limit 3";
 		ArrayList<Word> list = new ArrayList<Word>();
 	    ResultSet rs = null;
 	    try {
@@ -149,6 +149,7 @@ public class WordDao {
 	    
 	    return list;
 	}
+	                                         
 	public int getRowsCount(String wordTableName){
 		DBBean db = new DBBean();
 		Connection conn = db.getConnection();

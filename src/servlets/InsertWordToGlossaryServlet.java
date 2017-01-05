@@ -11,21 +11,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import bean.dao.UserDao;
-import bean.dao.WordDao;
-import bean.vo.Word;
+import bean.dao.GlossaryInfoDao;
 
 /**
- * Servlet implementation class GetWordsByStepServlet
+ * Servlet implementation class InsertWordToGlossary
  */
-
-public class GetWordsByStepServlet extends HttpServlet {
+public class InsertWordToGlossaryServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GetWordsByStepServlet() {
+    public InsertWordToGlossaryServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,38 +32,39 @@ public class GetWordsByStepServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.setContentType("text/html;charset=utf-8");
+		response.setContentType("text/html;utf-8");
 		HttpSession session = request.getSession(false);
 		PrintWriter out = response.getWriter();
 		if(session == null||session.getAttribute("username") == null){
-			out.print(3);//3表示用户未登录
+			out.print(3);//用户未登录
 		}
 		else{
+			String glossaryName = request.getParameter("glossaryName");
 			String username = (String)session.getAttribute("username");
-		    UserDao userdao = new UserDao();
-		    String wordTable = userdao.selectWordTable(username);
-		    WordDao worddao = new WordDao();
-		    String wordIdStr = request.getParameter("wordid");
-		    int wordid = Integer.parseInt(wordIdStr);
-		    try {
-				ArrayList<Word> list = worddao.getWordsByStep(3, wordTable, wordid);
-				boolean first = true;
-				String finalStr = "";
-				String tempStr;
-				for(int i=0;i<list.size();i++){
-					tempStr = (first?"":",")+"{"+list.get(i).toJsonString()+"}";
-					first = false;
-					finalStr += tempStr;
+			GlossaryInfoDao glossaryinfodao = new GlossaryInfoDao();
+			ArrayList<String>  list= glossaryinfodao.selectUserFromGlossaryInfo(username);
+			if(list == null){
+				out.print(-5);//查询glossaryinfo信息时出错
+			}
+			else{
+				if(list.size() == 2){
+					String oldGlossaryName = list.get(0);
+					String oldGlossaryNameInternal = list.get(1);
+					String[] gn = oldGlossaryName.split(",");
+					String[] gni = oldGlossaryNameInternal.split(",");
+					int index = -1;
+					for(int i = 0;i<gn.length;i++){
+						if(gn[i].equals(glossaryName)){
+							index = i;
+							break;
+						}
+					}
+					if(index != -1){
+						String glossaryNameInternal = gni[index];
+					}
 				}
-				finalStr = "{'words':["+finalStr+"]}";
-		    } catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
 		}
-		
-	    
-	    
 	}
 
 	/**
@@ -74,7 +72,6 @@ public class GetWordsByStepServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request,response);
 	}
 
 }

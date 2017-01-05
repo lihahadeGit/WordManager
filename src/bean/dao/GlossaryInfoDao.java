@@ -55,13 +55,12 @@ public class GlossaryInfoDao {
 				list.add(glossaryName);
 				list.add(glossaryNameInternal);
 			}
+			return list;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return null;
 		}
-		
-		return list;
 	}
 
 }
