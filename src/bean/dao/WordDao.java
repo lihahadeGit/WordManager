@@ -107,7 +107,29 @@ public class WordDao {
 	public ArrayList<Word> getWord(String wordTable){
 		DBBean db = new DBBean();
 		Connection conn = db.getConnection();
-		String sql = "select * from "+wordTable+" order by addtime desc limit 10";
+		String sql = "select * from "+wordTable+" order by addtime desc limit 9";
+	    ArrayList<Word> list = new ArrayList<Word>();
+	    ResultSet rs = null;
+	    try {
+			rs = db.executeQuery(sql, null);
+			while(rs.next()){
+				Word word = new Word();
+				word.setWordProperty(rs.getInt(1),rs.getString(2), rs.getString(3), rs.getString(4),
+						rs.getString(5),rs.getInt(6), rs.getInt(7), rs.getDate(8), rs.getString(9));
+			    list.add(word);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    
+	    return list;
+	}
+	
+	public ArrayList<Word> getAllWord(String wordTable){
+		DBBean db = new DBBean();
+		Connection conn = db.getConnection();
+		String sql = "select * from "+wordTable;
 	    ArrayList<Word> list = new ArrayList<Word>();
 	    ResultSet rs = null;
 	    try {
@@ -131,7 +153,7 @@ public class WordDao {
 		Connection conn = db.getConnection();
 		Conver conver = new Conver();
 		//Date date = conver.ConverToDateGeneral(dateStr);
-		String sql = "select * from "+wordTable+" where wordid <= "+wordid+" order by addTime desc limit 3";
+		String sql = "select * from "+wordTable+" where wordid <= "+wordid+" order by addTime desc limit "+step;
 		ArrayList<Word> list = new ArrayList<Word>();
 	    ResultSet rs = null;
 	    try {
@@ -149,7 +171,31 @@ public class WordDao {
 	    
 	    return list;
 	}
-	                                         
+	
+	public ArrayList<Word> getWordsByDate(String dateStr,String wordTable,int wordid) throws Exception{
+		DBBean db = new DBBean();
+		Connection conn = db.getConnection();
+		Conver conver = new Conver();
+		Date date = conver.ConverToDateGeneral(dateStr);
+		String sql = "select * from "+wordTable+" where addtime <= '"+date+"' order by addTime desc limit 9";
+		ArrayList<Word> list = new ArrayList<Word>();
+	    ResultSet rs = null;
+	    try {
+			rs = db.executeQuery(sql, null);
+			while(rs.next()){
+				Word word = new Word();
+				word.setWordProperty(rs.getInt(1),rs.getString(2), rs.getString(3), rs.getString(4),
+						rs.getString(5),rs.getInt(6), rs.getInt(7), rs.getDate(8), rs.getString(9));
+			    list.add(word);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    
+	    return list;
+	}
+	
 	public int getRowsCount(String wordTableName){
 		DBBean db = new DBBean();
 		Connection conn = db.getConnection();

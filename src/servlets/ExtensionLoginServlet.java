@@ -15,7 +15,6 @@ import bean.dao.UserDao;
 /**
  * Servlet implementation class ExtensionLoginServlet
  */
-@WebServlet("/ExtensionLoginServlet")
 public class ExtensionLoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

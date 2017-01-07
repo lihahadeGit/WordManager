@@ -17,7 +17,6 @@ import bean.dao.WordDao;
 /**
  * Servlet implementation class SaveWordServlet
  */
-@WebServlet("/SaveWordServlet")
 public class ExtensionSaveWordServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

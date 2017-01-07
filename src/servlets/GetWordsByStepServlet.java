@@ -48,8 +48,10 @@ public class GetWordsByStepServlet extends HttpServlet {
 		    WordDao worddao = new WordDao();
 		    String wordIdStr = request.getParameter("wordid");
 		    int wordid = Integer.parseInt(wordIdStr);
+		    String stepStr = request.getParameter("step");
+		    int step = Integer.parseInt(stepStr);
 		    try {
-				ArrayList<Word> list = worddao.getWordsByStep(3, wordTable, wordid);
+				ArrayList<Word> list = worddao.getWordsByStep(step, wordTable, wordid);
 				boolean first = true;
 				String finalStr = "";
 				String tempStr;
@@ -59,6 +61,8 @@ public class GetWordsByStepServlet extends HttpServlet {
 					finalStr += tempStr;
 				}
 				finalStr = "{'words':["+finalStr+"]}";
+				request.setAttribute("finalStr",finalStr);
+				out.print(finalStr);
 		    } catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

@@ -37,7 +37,7 @@ public class RegisterServlet extends HttpServlet {
 		UserDao userdao = new UserDao();
 		int existUser = userdao.selectUser(username);
 		PrintWriter out = response.getWriter();
-		out.print(existUser);//0表示用户名未被注册，-1表示注册失败，1表示注册成功
+		out.print(existUser);//0表示用户名未被注册，-1表示查询失败，1表示用户名已被注册
 		
 	}
 
@@ -51,13 +51,18 @@ public class RegisterServlet extends HttpServlet {
 		String password = request.getParameter("password");
 		UserDao userdao = new UserDao();
 		PrintWriter out = response.getWriter();
-		int insertResult;
-		insertResult = userdao.insertUser(username, password);
-		//System.out.println(insertResult);
-		HttpSession session = request.getSession();
-		session.setAttribute("username",username);
-		//session.setAttribute("password",password );
-		out.print(insertResult);//-1表示失败，1表示成功
+		int existUser = userdao.selectUser(username);
+		if(existUser == 0){
+			int insertResult;
+			insertResult = userdao.insertUser(username, password);
+			//System.out.println(insertResult);
+			HttpSession session = request.getSession();
+			session.setAttribute("username",username);
+			//session.setAttribute("password",password );
+			out.print(insertResult);//-1表示失败，1表示成功
+		}else{
+			out.print(existUser);//1表示该用户名已被注册，-1表示查询失败
+		}
 		
 	}
 

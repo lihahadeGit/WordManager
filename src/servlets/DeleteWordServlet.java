@@ -16,6 +16,7 @@ import bean.dao.WordDao;
 /**
  * Servlet implementation class DeleteWordServlet
  */
+//用于浏览的时候删除
 public class DeleteWordServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

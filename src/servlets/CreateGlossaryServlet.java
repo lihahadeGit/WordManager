@@ -12,9 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import bean.dao.GlossaryDao;
-import bean.dao.GlossaryInfoDao;
 import bean.dao.UserDao;
-import bean.vo.GlossaryInfo;
 
 /**
  * Servlet implementation class CreateGlossaryServlet
@@ -49,8 +47,9 @@ public class CreateGlossaryServlet extends HttpServlet {
 				out.print(-2);//查询wordTable的过程中出错
 			}else{
 				String glossaryName = request.getParameter("glossaryName");
-				GlossaryInfoDao glossaryinfodao = new GlossaryInfoDao();
-				ArrayList<String> list = glossaryinfodao.selectUserFromGlossaryInfo(username);
+				String glossaryNameInternal = null;
+				boolean success = false;
+				ArrayList<String> list = userdao.selectGlossaryInfoFromUser(username);
 				if(list != null){
 					if(list.size() == 2){
 						String oldGlossaryName = (String)list.get(0);
@@ -60,37 +59,32 @@ public class CreateGlossaryServlet extends HttpServlet {
 						}
 						else{
 							GlossaryDao glossarydao = new GlossaryDao();
-							String glossaryNameInternal = glossarydao.createGlossary(wordTable,oldGlossaryNameInternal);
+							glossaryNameInternal = glossarydao.createGlossary(wordTable,oldGlossaryNameInternal);
 							if(glossaryNameInternal == null){
 								out.print(-3);//创建glossary表出错
 							}
 							else{
-								String newGlossaryName = oldGlossaryName+","+glossaryName;
-								String newGlossaryNameInternal = oldGlossaryNameInternal+","+glossaryNameInternal;
-								int returnValue = glossaryinfodao.updateGlossaryInfo(username, newGlossaryName, newGlossaryNameInternal);
-								out.print(returnValue);//-1表示更新数据库时出错，0表示该用户不存在，1表示更新成功
+								glossaryName = oldGlossaryName+","+glossaryName;
+								glossaryNameInternal = oldGlossaryNameInternal+","+glossaryNameInternal;
+								success = true;
 							}
 						}
 				     }
 					else{
 						GlossaryDao glossarydao = new GlossaryDao();
-						String glossaryNameInternal = glossarydao.createGlossary(wordTable,"");
+						glossaryNameInternal = glossarydao.createGlossary(wordTable,"");
 						if(glossaryNameInternal == null){
 							out.print(-3);//创建glossary表出错
 						}
-						else{
-							int returnValue = glossaryinfodao.insertIntoGlossaryInfo(username, glossaryName, glossaryNameInternal);
-							if(returnValue == -1){
-								out.print(-4);//插入数据到glossaryInfo失败
-							}
-							else if(returnValue == 1){
-								out.print(3);//插入数据成功
-							}
-						}
+						success = true;
+					}
+					if(success){
+						int returnValue = userdao.updateGlossaryInfo(username, glossaryName, glossaryNameInternal);
+						out.print(returnValue);//-1表示更新数据库时出错，0表示该用户不存在，1表示更新成功
 					}
 				}
 				else{
-					out.print(-5);//查询glossaryinfo信息时出错
+					out.print(-4);//查询glossaryinfo信息时出错
 				}
 				
 				/*else{

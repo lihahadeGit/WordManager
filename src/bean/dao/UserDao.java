@@ -13,13 +13,17 @@ public class UserDao {
 	public int insertUser(String username,String password){
 		DBBean db = new DBBean();
 		Connection conn = db.getConnection();
-		String sql = "insert into user values(?,?,?)";
+		String sql = "insert into user values(?,?,?,?,?)";
 		int returnValue = 0;
 		String wordTableName = username+"wt";
+		String glossaryName = null;
+		String glossaryNameInternal = null;
 		ArrayList params = new ArrayList();
 		params.add(username);
 		params.add(password);
 		params.add(wordTableName);
+		params.add(glossaryName);
+		params.add(glossaryNameInternal);
 		WordDao wd = new WordDao();
 		try{
 			 returnValue = db.executeUpdateForUser(sql, params);
@@ -61,6 +65,22 @@ public class UserDao {
 			returnValue = db.executeUpdateForUser(sql, null);
 		}
 		catch(Exception e){
+			e.printStackTrace();
+			return -1;
+		}
+		
+		return returnValue;
+	}
+	
+	public int updateGlossaryInfo(String username,String newGlossaryName,String newGlossaryNameInternal){
+		DBBean db = new DBBean();
+		Connection conn = db.getConnection();
+		String sql = "update user set glossaryname = '"+newGlossaryName+"' , glossarynameinternal = '"+newGlossaryNameInternal+"' where username = '"+username+"'";
+		int returnValue;
+		try {
+			returnValue = db.executeUpdateForUser(sql, null);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return -1;
 		}
@@ -116,8 +136,10 @@ public class UserDao {
 		ResultSet rs = null;
 		try {
 			rs = db.executeQuery(sql, null);
-			rs.next();
-			wordtable = rs.getString(1);
+			if(rs.next()){
+				wordtable = rs.getString(1);
+			}
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -126,5 +148,29 @@ public class UserDao {
 		}
 		
 		return wordtable;
+	}
+	
+	public ArrayList<String> selectGlossaryInfoFromUser(String username){
+		DBBean db = new DBBean();
+		Connection conn = db.getConnection();
+		String sql = "select glossaryname,glossarynameinternal from user where username = '"+username+"'";
+		ResultSet rs = null;
+		ArrayList<String> list = new ArrayList<String>();
+		try {
+			rs = db.executeQuery(sql, null);
+			if(rs.next()){
+				if(rs.getString(1) != null&&rs.getString(2) != null){
+					String glossaryName = rs.getString(1);
+					String glossaryNameInternal = rs.getString(2);
+					list.add(glossaryName);
+					list.add(glossaryNameInternal);
+				}
+			}
+			return list;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
 	}
 }

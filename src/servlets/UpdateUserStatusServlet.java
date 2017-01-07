@@ -15,7 +15,6 @@ import bean.dao.UserDao;
 /**
  * Servlet implementation class UpdateUserStatus
  */
-@WebServlet("/UpdateUserStatus")
 public class UpdateUserStatusServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

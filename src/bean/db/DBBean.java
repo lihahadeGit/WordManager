@@ -106,7 +106,7 @@ public class DBBean {
 		return pstmt.executeUpdate();
 	}
 	
-	public int executeUpdateForGlossaryInfo(String sql,ArrayList params) throws Exception{
+	/*public int executeUpdateForGlossaryInfo(String sql,ArrayList params) throws Exception{
 		if(conn == null){
 			throw new Exception("数据库没有连接！");
 		}
@@ -117,7 +117,7 @@ public class DBBean {
 		}
 		
 		return pstmt.executeUpdate();
-	}
+	}*/
 	
 	public int executeUpdateForGlossary(String sql,ArrayList params) throws Exception{
 		if(conn == null){
