@@ -32,7 +32,7 @@ public class RegisterServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.setContentType("text/html;charset=utf-8");
+		response.setContentType("text/plain;charset=utf-8");
 		String username = request.getParameter("username");
 		UserDao userdao = new UserDao();
 		int existUser = userdao.selectUser(username);

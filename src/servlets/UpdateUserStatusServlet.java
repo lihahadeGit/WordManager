@@ -39,7 +39,7 @@ public class UpdateUserStatusServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.setContentType("text/utf-8;charset=utf-8");
+		response.setContentType("text/plain;charset=utf-8");
 		String checkOrUpdate = request.getParameter("checkOrUpdate");
 		String inputPassword = request.getParameter("password");
 		HttpSession session = request.getSession();

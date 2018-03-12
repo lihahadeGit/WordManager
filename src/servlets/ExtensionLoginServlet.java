@@ -39,31 +39,33 @@ public class ExtensionLoginServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.setContentType("text/html;charset=utf-8");
+		response.setContentType("text/plain;charset=utf-8");
 		HttpSession session = request.getSession(false);
 		PrintWriter out = response.getWriter();
-		String username = request.getParameter("username");
+		String username;
 		String inputPassword = request.getParameter("password");
 		if(session != null){
-			out.print("{'status':3,'username':"+username+"}");//3表示用户已登录
+			username = (String)session.getAttribute("username");
+			out.print("{\"status\":3,\"username\":\""+username+"\"}");//3表示用户已登录
 		}
 		else{
-			if(username == null || inputPassword == null){
-				out.print("{'status':2,'username':"+username+"}");//2表示用户名或密码为空
+			username = request.getParameter("username");
+			if(username == "" || inputPassword == ""){
+				out.print("{\"status\":2,\"username\":null}");//2表示用户名或密码为空
 			}
 			else{
 				UserDao userdao = new UserDao();
 				String password = userdao.selectPassword(username);
 				if(password.equals("-1")){
-					out.print("{'status':-1,'username':"+username+"}");//-1表示在数据库中查询密码时出现错误
+					out.print("{\"status\":-1,\"username\":\""+username+"\"}");//-1表示在数据库中查询密码时出现错误
 				}
 				else if(inputPassword.equals(password)){
 					HttpSession hSession = request.getSession();
 					hSession.setAttribute("username",username);
-					out.print("{'status':1,'username':"+username+"}");//1表示登录成功
+					out.print("{\"status\":1,\"username\":\""+username+"\"}");//1表示登录成功
 				}
 				else{
-					out.print("{'status':0,'username':"+username+"}");//0表示密码不正确
+					out.print("{\"status\":0,\"username\":\""+username+"\"}");//0表示密码不正确
 				}
 			}
 		}

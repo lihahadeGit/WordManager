@@ -36,11 +36,11 @@ public class GetWordsInitServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.setContentType("text/html;charset=utf-8");
+		response.setContentType("text/plain;charset=utf-8");
 		HttpSession session = request.getSession(false);
 		PrintWriter out = response.getWriter();
 		if(session == null||session.getAttribute("username") == null){
-			out.print(3);//3表示用户未登录
+			out.print("{\"type\":3}");//3表示用户未登录
 		}
 		else{
 			String username = (String)session.getAttribute("username");
@@ -68,11 +68,11 @@ public class GetWordsInitServlet extends HttpServlet {
 						first = false;
 						finalStr += tempStr;
 					}
-					finalStr = "{'words':["+finalStr+"]}";
-					request.setAttribute("finalStr",finalStr);
+					finalStr = "{\"words\":["+finalStr+"],\"type\":1}";//执行成功
+					out.print(finalStr);
 				}else{
 					//设置响应状态码为500
-					response.sendError(500,"出错了");
+					out.print("{\"type\":-1}");//出错了
 				}
 			}
 		}

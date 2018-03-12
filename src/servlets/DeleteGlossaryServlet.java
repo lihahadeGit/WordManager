@@ -35,7 +35,7 @@ public class DeleteGlossaryServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.setContentType("utf-8");
+		response.setContentType("text/plain;charset=utf-8");
 		HttpSession session = request.getSession(false);
 		PrintWriter out = response.getWriter();
 		if(session == null||session.getAttribute("username") == null){

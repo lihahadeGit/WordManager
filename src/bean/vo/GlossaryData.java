@@ -68,8 +68,8 @@ public class GlossaryData {
 		String wordId = String.valueOf(this.wordId);
 		String next = String.valueOf(this.next);
 		String type = String.valueOf(this.type);
-		String returnStr = "wordid:"+wordId+","+"next:"+next+","+"type:"+type+","+"text_Chinese:"+text_Chinese+","+"text_English:"+text_English+","+"alphabetUK:"+alphabetUK+","
-				+"alphabetUS:"+alphabetUS+","+"dateStr:"+dateStr;
+		String returnStr = "\"wordid\":\""+wordId+"\","+"\"next\":\""+next+"\","+"\"type\":\""+type+"\","+"\"text_Chinese\":\""+text_Chinese+"\","+"\"text_English\":\""+text_English+"\","+"\"alphabetUK\":\""+alphabetUK+"\","
+				+"\"alphabetUS\":\""+alphabetUS+"\","+"\"dateStr\":\""+dateStr+"\"";
 		return returnStr;
 		
 	}

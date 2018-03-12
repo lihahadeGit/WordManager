@@ -1,0 +1,51 @@
+.practice-container{
+	width: 67%;
+	height: 500px;
+	padding: 10px;
+	float: left;
+	border: 1px solid rgb(216,222,226);
+	border-radius: 5px;
+	background: white;
+	position: relative;
+}
+.mint-blue-container{
+	width: 28%;
+	height: 500px;
+	padding: 10px;
+	float: right;
+	background: white;
+	border-radius: 5px;
+	border: 1px solid rgb(216,222,226);
+}
+.practice-status{
+	width: 100%;
+	height: 50px;
+	border-bottom: 1px solid rgb(216,222,226);
+}
+.card{
+	position: absolute;
+	border-radius: 5px;
+	border: 1px solid rgb(216,222,226);
+}
+.default-last{
+	width: 20%;
+	height: 208px;
+	left: 5%;
+	top: 208px;
+	line-height: 208px;
+	text-align: center;
+}
+.default-word{
+	width: 35%;
+	height: 364px;
+	left: 33%;
+	top: 114px;
+}
+.default-next{
+	width: 20%;
+	height: 208px;
+	left: 75%;
+	top: 208px;
+	line-height: 208px;
+	text-align: center;
+}

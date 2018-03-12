@@ -34,24 +34,24 @@ public class GetInitGlossaryDataServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.setContentType("text/html;charset=utf-8");
+		response.setContentType("text/plain;charset=utf-8");
 		HttpSession session = request.getSession(false);
 		PrintWriter out = response.getWriter();
-		String username = (String)session.getAttribute("username");
-		if(session == null||username == null){
+		if(session == null||session.getAttribute("username") == null){
 			out.print(3);//3表示用户未登录
 		}
 		else{
+			String username = (String)session.getAttribute("username");
 			UserDao userdao = new UserDao();
 			String wordTable = userdao.selectWordTable(username);
 			String glossaryName = request.getParameter("glossaryName");
 			if(wordTable == null){
-				out.print(-1);//查询wordTable失败
+				out.print("{\"type\":-1}");//查询wordTable失败
 			}
 			else{
 				ArrayList<String>  list= userdao.selectGlossaryInfoFromUser(username);
 				if(list == null){
-					out.print(-2);//查询glossaryinfo信息时出错
+					out.print("{\"type\":-2}");//查询glossaryinfo信息时出错
 				}
 				else{
 					if(list.size() == 2){
@@ -82,8 +82,7 @@ public class GetInitGlossaryDataServlet extends HttpServlet {
 									first = false;
 									finalStr += tempStr;
 								}
-								finalStr = "{'words':["+finalStr+"]}";
-								request.setAttribute("finalStr",finalStr);
+								finalStr = "{\"words\":["+finalStr+"],\"type\":1}";
 								out.print(finalStr);
 							}
 							

@@ -1,0 +1,237 @@
+.words-container{
+	width: 98%;
+	height: 550px;
+	padding: 10px;
+	padding-bottom: 0px;
+	float: left;
+	border: 1px solid rgb(216,222,226);
+	border-radius: 5px;
+	background: white;
+	position: relative;
+}
+.words-status{
+	height: 49px;
+	border-bottom: 1px solid rgb(216,222,226);
+	position: relative;
+	z-index: 100;
+	background: white;
+}
+.words-show{
+	width: 100%;
+	height: 450px;
+}
+.time{
+	float: left;
+	width: 8%;
+	height: 100%;
+	border-right: 2px dashed rgb(2,110,0);
+	position: relative;
+}
+.words-line{
+	float: left;
+	width: 81%;
+	height: 100%;
+	position: relative;
+}
+.words-item{
+	height: 50px;
+	position: absolute;
+	z-index: 1;
+}
+.line1{
+	top: 0px;
+}
+.line2{
+	top: 50px;
+}
+.line3{
+	top: 100px;
+}
+.line4{
+	top: 150px;
+}
+.line5{
+	top: 200px;
+}
+.line6{
+	top: 250px;
+}
+.line7{
+	top: 300px;
+}
+.line8{
+	top: 350px;
+}
+.line9{
+	top: 400px;
+}
+.line10{
+	top: 450px;
+}
+.words-time{
+	display: block;
+	width: 80%;
+	text-align: right;
+	padding-right: 15px;
+	line-height: 50px;
+}
+.words{
+	width: 99%;
+	line-height: 50px;
+}
+.status{
+	font-size: 14px;
+	display: block;
+}
+.status-input{
+	position: absolute;
+	margin-top: 10px;
+	height: 30px;
+	width: 98%;
+	top: 0px;
+	left: 0px;
+	display: none;
+}
+.status-en-container{
+	position: relative;
+	width: 9%;
+	float: left;
+	height: 50px;
+	border-right: 1px solid rgb(216,222,226);
+}
+.status-zh-container{
+	position: relative;
+	width: 40%;
+	float: left;
+	height: 50px;
+	font-size: 10px;
+	border-right: 1px solid rgb(216,222,226);
+	line-height: 15px;
+}
+.status-usPronounce-container{
+	position: relative;
+	width: 10%;
+	float: left;
+	height: 50px;
+	border-right: 1px solid rgb(216,222,226);
+}
+.status-ukpronounce-container{
+	position: relative;
+	width: 10%;
+	float: left;
+	height: 50px;
+	border-right: 1px solid rgb(216,222,226);
+}
+.status-glossary-container{
+	position: relative;
+	width: 18%;
+	float: left;
+	height: 50px;
+	border-right: 1px solid rgb(216,222,226);
+	line-height: normal;
+}
+.add-img{
+	width: 30px;
+	height: 30px;
+	padding: 10px;
+}
+.addTO-glossary{
+	display: none;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+	border: 1px solid rgb(216,222,226);
+	background: white;
+}
+.glossary-name{
+	width: 100px;
+}
+.confirm{
+	border-width: 0px;
+}
+.status-delete-container{
+	position: relative;
+	width: 4%;
+	float: left;
+	height: 50px;
+	border-right: 1px solid rgb(216,222,226);
+}
+.delete{
+	border-width: 0px;
+}
+.adjust-container{
+	float: right;
+	height: 450px;
+	width: 10%;
+}
+.up-adjust{
+	border-bottom: 1px solid rgb(216,222,226);
+	height: 179px;
+	width: 95%;
+	text-align: center;
+}
+.down-adjust{
+	border-top: 1px solid rgb(216,222,226);
+	height: 179px;
+	width: 95%;
+	text-align: center;
+}
+.step-input{
+	border-width: 0px;
+	height: 31px;
+	width: 35%;
+	margin-top: 73px;
+	margin-bottom: 73px;
+	border-bottom: 1px solid rgb(216,222,226);
+	border-top: 1px solid rgb(216,222,226);	
+	text-align: center;
+}
+.time-adjust{
+	height: 50px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	width: 95%;
+}
+.item-adjust-container{
+	height: 50px;
+	float: left;
+}
+.adjust:link,.adjust:visited{
+	color: rgb(51,51,51);
+}
+.adjust:hover,.adjust:active{
+	color: rgb(51,51,51);
+}
+.adjust{
+	display: block;
+	height: 15px;
+	width: 100%;
+	text-decoration: none;
+	text-align: center;
+	line-height: 15px;
+}
+.adjust-input{
+	color: rgb(2,110,0);
+	text-align: center;
+	border-width: 0px;
+	width: 100%;
+	height: 20px;
+	font-size: 18px; 
+}
+.year-adjust{
+	width: 40%;
+}
+.month-adjust{
+	width: 30%;
+}
+.day-adjust{
+	width: 30%;
+}
+.words-bottom{
+	height: 50px;
+	position: relative;
+	z-index: 100;
+	background: white;
+}

@@ -74,8 +74,8 @@ public class Word {
 		String dateStr = df.format(this.addTime);
 		String reciteFlag = String.valueOf(this.reciteFlag);
 		String reciteNum = String.valueOf(this.reciteNum);
-		String returnStr = "wordid:"+wordId+","+"text_Chinese:"+text_Chinese+","+"text_English:"+text_English+","+"alphabetUK:"+alphabetUK+","
-				+"alphabetUS:"+alphabetUS+","+"reciteFlag:"+reciteFlag+","+"reciteNum:"+reciteNum+","+"dateStr:"+dateStr+","+"resourceUrl:"+resourceUrl;
+		String returnStr = "\"wordid\":"+wordId+","+"\"text_Chinese\":\""+text_Chinese+"\","+"\"text_English\":\""+text_English+"\","+"\"alphabetUK\":\""+alphabetUK+"\","
+				+"\"alphabetUS\":\""+alphabetUS+"\","+"\"reciteFlag\":\""+reciteFlag+"\","+"\"reciteNum\":\""+reciteNum+"\","+"\"dateStr\":\""+dateStr+"\","+"\"resourceUrl\":\""+resourceUrl+"\"";
 		return returnStr;
 		
 	}

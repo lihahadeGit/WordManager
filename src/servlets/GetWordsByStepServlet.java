@@ -35,7 +35,7 @@ public class GetWordsByStepServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.setContentType("text/html;charset=utf-8");
+		response.setContentType("text/plain;charset=utf-8");
 		HttpSession session = request.getSession(false);
 		PrintWriter out = response.getWriter();
 		if(session == null||session.getAttribute("username") == null){
@@ -50,8 +50,9 @@ public class GetWordsByStepServlet extends HttpServlet {
 		    int wordid = Integer.parseInt(wordIdStr);
 		    String stepStr = request.getParameter("step");
 		    int step = Integer.parseInt(stepStr);
+		    String type = request.getParameter("type");
 		    try {
-				ArrayList<Word> list = worddao.getWordsByStep(step, wordTable, wordid);
+				ArrayList<Word> list = worddao.getWordsByStep(step, wordTable, wordid,type);
 				boolean first = true;
 				String finalStr = "";
 				String tempStr;
@@ -60,7 +61,7 @@ public class GetWordsByStepServlet extends HttpServlet {
 					first = false;
 					finalStr += tempStr;
 				}
-				finalStr = "{'words':["+finalStr+"]}";
+				finalStr = "{\"words\":["+finalStr+"]}";
 				request.setAttribute("finalStr",finalStr);
 				out.print(finalStr);
 		    } catch (Exception e) {

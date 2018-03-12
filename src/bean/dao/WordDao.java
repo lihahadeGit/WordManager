@@ -17,7 +17,7 @@ public class WordDao {
 	public boolean createWordTable(String wordTableName){
 		DBBean db = new DBBean();
 		Connection conn = db.getConnection();
-		String sql = "create table "+wordTableName+" (wordid int auto_increment,textchinese varchar(20),textenglish varchar(20),alphabetUK varchar(20),alphabetUS varchar(20),reciteflag int,recitenum int,addtime date,resourceurl varchar(20),primary key(wordid));";
+		String sql = "create table "+wordTableName+" (wordid int auto_increment,textchinese varchar(100),textenglish varchar(100),alphabetUK varchar(50),alphabetUS varchar(50),reciteflag int,recitenum int,addtime date,resourceurl varchar(20),primary key(wordid));";
 	    try{
 	    	db.executeCreate(sql, null);
 	    }
@@ -107,7 +107,7 @@ public class WordDao {
 	public ArrayList<Word> getWord(String wordTable){
 		DBBean db = new DBBean();
 		Connection conn = db.getConnection();
-		String sql = "select * from "+wordTable+" order by addtime desc limit 9";
+		String sql = "select * from "+wordTable+" order by wordid desc limit 9";
 	    ArrayList<Word> list = new ArrayList<Word>();
 	    ResultSet rs = null;
 	    try {
@@ -148,12 +148,18 @@ public class WordDao {
 	    return list;
 	}
 	
-	public ArrayList<Word> getWordsByStep(int step,String wordTable,int wordid) throws Exception{
+	public ArrayList<Word> getWordsByStep(int step,String wordTable,int wordid,String type) throws Exception{
 		DBBean db = new DBBean();
 		Connection conn = db.getConnection();
 		Conver conver = new Conver();
 		//Date date = conver.ConverToDateGeneral(dateStr);
-		String sql = "select * from "+wordTable+" where wordid <= "+wordid+" order by addTime desc limit "+step;
+		String sql;
+		if(type.equals("new")){
+			sql = "select * from "+wordTable+" where wordid > "+wordid+" order by wordid asc limit "+step;
+		}
+		else{
+			sql = "select * from "+wordTable+" where wordid < "+wordid+" order by wordid asc limit "+step;
+		}
 		ArrayList<Word> list = new ArrayList<Word>();
 	    ResultSet rs = null;
 	    try {
@@ -172,7 +178,7 @@ public class WordDao {
 	    return list;
 	}
 	
-	public ArrayList<Word> getWordsByDate(String dateStr,String wordTable,int wordid) throws Exception{
+	public ArrayList<Word> getWordsByDate(String dateStr,String wordTable) throws Exception{
 		DBBean db = new DBBean();
 		Connection conn = db.getConnection();
 		Conver conver = new Conver();

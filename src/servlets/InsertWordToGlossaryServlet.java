@@ -36,7 +36,7 @@ public class InsertWordToGlossaryServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.setContentType("text/html;utf-8");
+		response.setContentType("text/plain;utf-8");
 		HttpSession session = request.getSession(false);
 		PrintWriter out = response.getWriter();
 		if(session == null||session.getAttribute("username") == null){

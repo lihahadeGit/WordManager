@@ -18,6 +18,14 @@
     <url-pattern>/Login</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>LogoutServlet</servlet-name>
+    <servlet-class>servlets.LogoutServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LogoutServlet</servlet-name>
+    <url-pattern>/Logout</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>UpdateUserStatusServlet</servlet-name>
     <servlet-class>servlets.UpdateUserStatusServlet</servlet-class>
   </servlet>
@@ -81,6 +89,14 @@
     <servlet-name>GetWordsByDateServlet</servlet-name>
     <url-pattern>/GetWordsByDate</url-pattern>
   </servlet-mapping>
+   <servlet>
+    <servlet-name>AddWordClickServlet</servlet-name>
+    <servlet-class>servlets.AddWordClickServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddWordClickServlet</servlet-name>
+    <url-pattern>/AddWordClick</url-pattern>
+  </servlet-mapping>
   <servlet>
     <servlet-name>DeleteWordServlet</servlet-name>
     <servlet-class>servlets.DeleteWordServlet</servlet-class>
@@ -112,6 +128,14 @@
   <servlet-mapping>
     <servlet-name>InsertWordToGlossaryServlet</servlet-name>
     <url-pattern>/InsertWordToGlossary</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>GetAllGlossaryNameServlet</servlet-name>
+    <servlet-class>servlets.GetAllGlossaryNameServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetAllGlossaryNameServlet</servlet-name>
+    <url-pattern>/GetAllGlossaryName</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>GetInitGlossaryDataServlet</servlet-name>

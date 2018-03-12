@@ -31,7 +31,7 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.setContentType("text/html;charset=utf-8");
+		response.setContentType("text/plain;charset=utf-8");
 		String username = request.getParameter("username");
 		UserDao userdao = new UserDao();
 		int existUser = userdao.selectUser(username);
@@ -57,15 +57,17 @@ public class LoginServlet extends HttpServlet {
 			else{
 				UserDao userdao = new UserDao();
 				String password = userdao.selectPassword(username);
-				if(password.equals("-1")){
-					out.print(-1);//数据库查找出错
-				}
-				else{
-					if(inputPassword.equals(password)){
-						out.print(1);//登录成功
-						session.setAttribute("username",username);
-					}else{
-						out.print(0);//密码不正确
+				if(password != null){
+					if(password.equals("-1")){
+						out.print(-1);//数据库查找出错
+					}
+					else{
+						if(inputPassword.equals(password)){
+							out.print(1);//登录成功
+							session.setAttribute("username",username);
+						}else{
+							out.print(0);//密码不正确
+						}
 					}
 				}
 			}
@@ -74,14 +76,16 @@ public class LoginServlet extends HttpServlet {
 			HttpSession hsession = request.getSession();
 			UserDao userdao = new UserDao();
 			String password = userdao.selectPassword(username);
-			if(password.equals("-1")){
-				out.print(-1);//数据库查找出错
-			}
-			if(inputPassword.equals(password)){
-				out.print(1);//登录成功
-				hsession.setAttribute("username",username);
-			}else{
-				out.print(0);//密码不正确
+			if(password != null){
+				if(password.equals("-1")){
+					out.print(-1);//数据库查找出错
+				}
+				if(inputPassword.equals(password)){
+					out.print(1);//登录成功
+					hsession.setAttribute("username",username);
+				}else{
+					out.print(0);//密码不正确
+				}
 			}
 		}
 		
